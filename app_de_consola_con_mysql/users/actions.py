@@ -13,11 +13,28 @@ class Actions:
         register = user.sign_up()
 
         if register[0] >= 1:
-            print(f"Perfect {register[1].name} you have registered correctly with the email {register[1].email}")
+            print(f"\nPerfect {register[1].name} you have registered correctly with the email {register[1].email}")
         else:
-            print("You have not registered correctly")  
+            print("\nYou have not registered correctly")  
 
     def log_in(self):
         print("\nOK, login to the system")
-        email = input("Enter  your email: ")
-        password = input("Enter a password: ")
+
+        try:
+            email = input("Enter  your email: ")
+            password = input("Enter a password: ")
+
+            user = model.User('', '', email, password)
+            login = user.log_in()
+
+            if email == login[3]:
+                print(f"Welcome {login[1]}, you have been register in the system on {login[5]}")
+                self.next_actions(login)
+        except Exception as e:
+            print(type(e))
+            print(type(e).__name__)
+            print("Incorrect login, try again")
+
+    
+    def next_actions(self, user):
+        pass
