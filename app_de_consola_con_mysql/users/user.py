@@ -1,6 +1,6 @@
 import users.connection as connection
 import datetime
-import hashlib #Para cifrar las contraseñas
+import hashlib #To encrypt passwords
 
 connect = connection.connect()
 database = connect[0]

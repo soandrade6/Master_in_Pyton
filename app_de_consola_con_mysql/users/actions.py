@@ -1,4 +1,5 @@
 import users.user as model
+import notes.actions
 
 class Actions:
 
@@ -28,13 +29,36 @@ class Actions:
             login = user.log_in()
 
             if email == login[3]:
-                print(f"Welcome {login[1]}, you have been register in the system on {login[5]}")
+                print(f"\nWelcome {login[1]}, you have been register in the system on {login[5]}")
                 self.next_actions(login)
         except Exception as e:
             print(type(e))
             print(type(e).__name__)
             print("Incorrect login, try again")
 
-    
     def next_actions(self, user):
-        pass
+        print("""
+        Acailable actions:
+              - Create note (create)
+              - Show your notes (show)
+              - Delete note (delete)
+              - Exit (exit)
+        """)
+        action = input("What do you want to do: ")
+        do = notes.actions.Actions()
+
+        if action == "create":
+            do.create(user)
+            self.next_actions(user)
+
+        elif action == "show":
+            do.show(user)
+            self.next_actions(user)
+
+        elif action == "delete":
+            do.delete(user)
+            self.next_actions(user)
+        
+        elif action == "exit":
+            print(f"See you later {user[1]}")
+            exit()
